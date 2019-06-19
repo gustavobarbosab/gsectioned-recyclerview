@@ -9,16 +9,14 @@ import com.gustavobarbosa.recyclerviewsectioned.example.model.HeaderModel
 class MainActivityRecyclerAdapter :
     SectionedRecyclerAdapter<
         MainActivityRecyclerAdapter.HeaderViewHolder,
-        MainActivityRecyclerAdapter.BodyViewHolder,
-        List<HeaderModel>>() {
+        MainActivityRecyclerAdapter.BodyViewHolder>() {
 
     private var list: MutableList<HeaderModel> = mutableListOf()
 
-    override fun putList(newList: List<HeaderModel>) {
-        super.putList(newList)
+    fun putList(newList: List<HeaderModel>) {
         list.clear()
         list.addAll(newList)
-        notifyDataSetChanged()
+        notifyDataChanged()
     }
 
     override fun onCreateHeaderViewHolder(view: View): HeaderViewHolder = HeaderViewHolder(view)
@@ -39,6 +37,10 @@ class MainActivityRecyclerAdapter :
     override fun getBodyLayout(): Int = R.layout.item_body_main
 
     override fun getHeaderLayout(): Int = R.layout.item_header_main
+
+    override fun getBodySize(headerPosition: Int): Int = list[headerPosition].bodies.size
+
+    override fun getHeaderSize(): Int = list.size
 
     class HeaderViewHolder(view: View) : SectionedRecyclerAdapter.SectionedHeaderViewHolder(view) {
         val title: TextView = view.findViewById(R.id.tvHeaderMain)

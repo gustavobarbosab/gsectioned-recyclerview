@@ -1,19 +1,19 @@
 package com.gustavobarbosa.recyclerviewsectioned.lib.business
 
-import com.gustavobarbosa.recyclerviewsectioned.lib.model.Header
 import com.gustavobarbosa.recyclerviewsectioned.lib.model.Section
 import java.util.TreeMap
 
-class SectionedAdapterManagerImpl<HEADER_MODEL : List<Header<*>>>
-    : SectionedAdapterManager<HEADER_MODEL> {
+class SectionedAdapterManagerImpl(
+    private val listener: SectionedAdapterManager.SectionedManagerListener)
+    : SectionedAdapterManager {
 
     private var totalSize = 0
     private var headerTreeMap = TreeMap<Int, Section>() // <HEADER_START,BODY_SIZE>
 
-    override fun mapPositions(list: HEADER_MODEL) {
+    override fun mapPositions(headerSize: Int) {
         resetVariables()
-        list.forEachIndexed { headerOriginalPosition, header ->
-            val bodySize = calcBodySize(header)
+        for (headerOriginalPosition in 0 until headerSize) {
+            val bodySize = calcBodySize(headerOriginalPosition)
             if (isBodyNotEmpty(bodySize)) {
                 mountHeaderTreeMap(headerOriginalPosition, bodySize)
                 reCalcTotal(bodySize)
@@ -43,7 +43,7 @@ class SectionedAdapterManagerImpl<HEADER_MODEL : List<Header<*>>>
             Section(headerOriginalPosition = headerOriginalPosition, bodySize = bodySize)
     }
 
-    private fun calcBodySize(header: Header<*>) = header.getListBody()?.size ?: 0
+    private fun calcBodySize(headerOriginalPosition: Int) = listener.bodySize(headerOriginalPosition)
 
     private fun isBodyNotEmpty(body: Int) = body != 0
 

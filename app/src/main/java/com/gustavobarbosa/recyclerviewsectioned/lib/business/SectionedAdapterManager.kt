@@ -1,10 +1,8 @@
 package com.gustavobarbosa.recyclerviewsectioned.lib.business
 
-import com.gustavobarbosa.recyclerviewsectioned.lib.model.Header
+interface SectionedAdapterManager {
 
-interface SectionedAdapterManager<HEADER_MODEL : List<Header<*>>> {
-
-    fun mapPositions(list: HEADER_MODEL)
+    fun mapPositions(headerSize: Int)
 
     fun headerPositionInRecycler(position: Int): Int
 
@@ -15,4 +13,8 @@ interface SectionedAdapterManager<HEADER_MODEL : List<Header<*>>> {
     fun isRecyclerPositionHeader(positionRecycler: Int): Boolean
 
     fun totalSize(): Int
+
+    interface SectionedManagerListener {
+        fun bodySize(headerPosition: Int): Int
+    }
 }

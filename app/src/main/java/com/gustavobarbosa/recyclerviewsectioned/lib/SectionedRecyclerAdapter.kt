@@ -6,25 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gustavobarbosa.recyclerviewsectioned.lib.business.SectionedAdapterFactory
+import com.gustavobarbosa.recyclerviewsectioned.lib.business.SectionedAdapterManager
+import com.gustavobarbosa.recyclerviewsectioned.lib.decorator.StickHeaderItemDecoration
+import com.gustavobarbosa.recyclerviewsectioned.lib.model.ItemType
 import com.gustavobarbosa.recyclerviewsectioned.lib.model.ItemType.Companion.BODY
 import com.gustavobarbosa.recyclerviewsectioned.lib.model.ItemType.Companion.HEADER
-import com.gustavobarbosa.recyclerviewsectioned.lib.business.SectionedAdapterManagerImpl
-import com.gustavobarbosa.recyclerviewsectioned.lib.decorator.StickHeaderItemDecoration
-import com.gustavobarbosa.recyclerviewsectioned.lib.model.Header
-import com.gustavobarbosa.recyclerviewsectioned.lib.model.ItemType
 
 abstract class SectionedRecyclerAdapter<
     HEADER_VIEW_HOLDER : SectionedRecyclerAdapter.SectionedViewHolder,
-    BODY_VIEW_HOLDER : SectionedRecyclerAdapter.SectionedViewHolder,
-    HEADER_MODEL : List<Header<*>>
-    > : RecyclerView.Adapter<SectionedRecyclerAdapter.SectionedViewHolder>(),
+    BODY_VIEW_HOLDER : SectionedRecyclerAdapter.SectionedViewHolder> :
+    RecyclerView.Adapter<SectionedRecyclerAdapter.SectionedViewHolder>(),
     StickHeaderItemDecoration.StickyHeaderInterface {
 
-    private val adapterManager = SectionedAdapterFactory.createSectionedAdapterManager<HEADER_MODEL>()
-
-    open fun putList(newList: HEADER_MODEL) {
-        adapterManager.mapPositions(newList)
+    private val listener = object: SectionedAdapterManager.SectionedManagerListener {
+        override fun bodySize(headerPosition: Int): Int  = getBodySize(headerPosition)
     }
+
+    private val adapterManager = SectionedAdapterFactory.createSectionedAdapterManager(listener)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionedViewHolder {
         return when (viewType) {
@@ -80,6 +78,11 @@ abstract class SectionedRecyclerAdapter<
 
     override fun getItemCount(): Int = adapterManager.totalSize()
 
+    fun notifyDataChanged() {
+        reloadList()
+        notifyDataSetChanged()
+    }
+
     abstract fun onCreateHeaderViewHolder(view: View): HEADER_VIEW_HOLDER
 
     abstract fun onCreateBodyViewHolder(view: View): BODY_VIEW_HOLDER
@@ -102,6 +105,14 @@ abstract class SectionedRecyclerAdapter<
 
     abstract class SectionedBodyViewHolder(view: View) : SectionedViewHolder(view) {
         override fun getSectionId(): Int = BODY
+    }
+
+    abstract fun getBodySize(headerPosition: Int): Int
+
+    abstract fun getHeaderSize(): Int
+
+    private fun reloadList() {
+        adapterManager.mapPositions(getHeaderSize())
     }
 
     private fun mountView(parent: ViewGroup, @LayoutRes layoutRes: Int) =
