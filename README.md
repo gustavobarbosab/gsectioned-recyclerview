@@ -49,17 +49,20 @@ class MainRecyclerAdapter :
 4. Feito os passos acima, partiremos para a implementação do adapter
 
     * getBodyLayout():
+    
     Deverá retornar somente o id do layout do Body.
     ```kotlin
     override fun getBodyLayout(): Int = R.layout.item_body_main
     ```
 
     * getHeaderLayout():
+    
     Deverá retornar somente o id do layout do Header.
     ```kotlin
     override fun getHeaderLayout(): Int = R.layout.item_header_main
     ```
     * onCreateHeaderViewHolder(view: View): 
+    
     O método recebe como parametro a view já inflada, portanto, basta passá-la no construtor do seu ViewHolder.
 
     ```kotlin
@@ -68,6 +71,7 @@ class MainRecyclerAdapter :
     ```
     
     * onCreateBodyViewHolder(view: View):
+    
     O mesmo ocorrerá para o Body.
 
     ```kotlin
@@ -75,16 +79,19 @@ class MainRecyclerAdapter :
             BodyViewHolder(view)
     ```
     * getHeaderSize()
+    
     Deve retornar o tamanho da lista de Headers.
     ```kotlin
     override fun getHeaderSize(): Int = list.size
     ```
     * getBodySize(headerPosition: Int)
+    
     Deve retornar o tamanho do Body de determinado Header.
     ```kotlin
     override fun getBodySize(headerPosition: Int): Int = list[headerPosition].bodies.size
     ```
     * onBindHeaderViewHolder(viewHolder: HeaderViewHolder, headerPosition: Int) 
+    
     Aqui é feito o bind do Header View Holder, conforme ocorre no Adapter convencional.
     ```kotlin
     override fun onBindHeaderViewHolder(viewHolder: HeaderViewHolder, headerPosition: Int) {
@@ -94,8 +101,8 @@ class MainRecyclerAdapter :
     ```
     
     * onBindBodyViewHolder(viewHolder: BodyViewHolder, headerPosition: Int, bodyPosition: Int)
+    
     Aqui é feito o bind do Body View Holder, conforme ocorre no Adapter convencional.
-
     ```kotlin
     override fun onBindBodyViewHolder(viewHolder: BodyViewHolder, headerPosition: Int, bodyPosition: Int) {
         val header = list[headerPosition]
