@@ -3,6 +3,7 @@ package com.gustavobarbosa.recyclerviewsectioned.example
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import com.gustavobarbosa.recyclerviewsectioned.R
 import com.gustavobarbosa.recyclerviewsectioned.lib.decorator.StickHeaderItemDecoration
 import com.gustavobarbosa.recyclerviewsectioned.example.model.ModelFactory
@@ -13,7 +14,11 @@ class MainActivity : AppCompatActivity() {
     private var calc = 0
     private val model
     get() = ModelFactory.getHeaderList(calc)
-    private val adapter =  MainActivityRecyclerAdapter()
+    private val adapter =  MainActivityRecyclerAdapter(object : MainActivityRecyclerAdapter.OnClickListener {
+        override fun onItemClicked(message: String) {
+            Toast.makeText(this@MainActivity,message,Toast.LENGTH_SHORT).show()
+        }
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

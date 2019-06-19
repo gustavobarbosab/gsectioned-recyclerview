@@ -6,7 +6,7 @@ import com.gustavobarbosa.recyclerviewsectioned.R
 import com.gustavobarbosa.recyclerviewsectioned.lib.SectionedRecyclerAdapter
 import com.gustavobarbosa.recyclerviewsectioned.example.model.HeaderModel
 
-class MainActivityRecyclerAdapter :
+class MainActivityRecyclerAdapter(val listener: MainActivityRecyclerAdapter.OnClickListener) :
     SectionedRecyclerAdapter<
         MainActivityRecyclerAdapter.HeaderViewHolder,
         MainActivityRecyclerAdapter.BodyViewHolder>() {
@@ -32,6 +32,9 @@ class MainActivityRecyclerAdapter :
         val header = list[headerPosition]
         val body = header.bodies[bodyPosition]
         viewHolder.title.text = body.value
+        viewHolder.title.setOnClickListener {
+            listener.onItemClicked("header:$headerPosition body:$bodyPosition")
+        }
     }
 
     override fun getBodyLayout(): Int = R.layout.item_body_main
@@ -48,5 +51,9 @@ class MainActivityRecyclerAdapter :
 
     class BodyViewHolder(view: View) : SectionedRecyclerAdapter.SectionedBodyViewHolder(view) {
         val title: TextView = view.findViewById(R.id.tvBodyMain)
+    }
+
+    interface OnClickListener {
+        fun onItemClicked(message: String)
     }
 }
