@@ -1,6 +1,8 @@
 package com.gustavobarbosa.recyclerviewsectioned.lib
 
+import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gustavobarbosa.recyclerviewsectioned.lib.ItemType.Companion.BODY
@@ -11,7 +13,8 @@ abstract class SectionedRecyclerAdapter<
         HEADER_VH : SectionedRecyclerAdapter.SectionedViewHolder,
         BODY_VH : SectionedRecyclerAdapter.SectionedViewHolder,
         HEADER : List<Header>
-        > : RecyclerView.Adapter<SectionedRecyclerAdapter.SectionedViewHolder>() {
+        > : RecyclerView.Adapter<SectionedRecyclerAdapter.SectionedViewHolder>(),
+    StickHeaderItemDecoration.StickyHeaderInterface {
 
     var totalSize = 0
     var hash = TreeMap<Int, Section>() // <HEADER_START,BODY_SIZE>
@@ -33,10 +36,16 @@ abstract class SectionedRecyclerAdapter<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionedViewHolder {
         return when (viewType) {
             HEADER -> {
-                onCreateHeaderViewHolder(parent)
+                val view = LayoutInflater.from(parent.context).inflate(
+                    getHeaderLayout(), parent, false
+                )
+                onCreateHeaderViewHolder(view)
             }
             else -> { //BODY
-                onCreateBodyViewHolder(parent)
+                val view = LayoutInflater.from(parent.context).inflate(
+                    getBodyLayout(), parent, false
+                )
+                onCreateBodyViewHolder(view)
             }
         }
     }
@@ -47,6 +56,7 @@ abstract class SectionedRecyclerAdapter<
                 onBindHeaderViewHolder(viewHolder as HEADER_VH, headerOriginalList(position))
             }
             else -> {
+
                 onBindBodyViewHolder(
                     viewHolder as BODY_VH,
                     headerOriginalList(position),
@@ -71,19 +81,29 @@ abstract class SectionedRecyclerAdapter<
         }
     }
 
-    private fun isPositionHeader(position: Int) = hash.containsKey(position)
+    override fun getHeaderPositionForItem(itemPosition: Int): Int =
+        headerRecyclerPosition(itemPosition)
 
-    override fun getItemCount(): Int {
-        return totalSize
+    override fun bindHeaderData(header: View, headerPosition: Int) {
+        onBindHeaderViewHolder(onCreateHeaderViewHolder(header),headerOriginalList(headerPosition))
     }
 
-    abstract fun onCreateHeaderViewHolder(parent: ViewGroup): HEADER_VH
+    override fun isHeader(itemPosition: Int): Boolean = isPositionHeader(itemPosition)
 
-    abstract fun onCreateBodyViewHolder(parent: ViewGroup): BODY_VH
+    private fun isPositionHeader(position: Int) = hash.containsKey(position)
+
+    override fun getItemCount(): Int = totalSize
+
+    abstract fun onCreateHeaderViewHolder(view: View): HEADER_VH
+
+    abstract fun onCreateBodyViewHolder(view: View): BODY_VH
 
     abstract fun onBindHeaderViewHolder(viewHolder: HEADER_VH, headerPosition: Int)
 
     abstract fun onBindBodyViewHolder(viewHolder: BODY_VH, headerPosition: Int, bodyPosition: Int)
+
+    @LayoutRes
+    abstract fun getBodyLayout(): Int
 
     abstract class SectionedViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         @ItemType

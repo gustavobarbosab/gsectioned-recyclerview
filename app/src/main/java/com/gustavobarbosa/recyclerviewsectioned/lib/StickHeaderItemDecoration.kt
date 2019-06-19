@@ -34,7 +34,7 @@ class StickHeaderItemDecoration(private val mListener: StickyHeaderInterface) : 
     }
 
     private fun getHeaderViewForItem(headerPosition: Int, parent: RecyclerView): View {
-        val layoutResId = mListener.getHeaderLayout(headerPosition)
+        val layoutResId = mListener.getHeaderLayout()
         val header = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
         mListener.bindHeaderData(header, headerPosition)
         return header
@@ -121,7 +121,7 @@ class StickHeaderItemDecoration(private val mListener: StickyHeaderInterface) : 
          * @param headerPosition int. Position of the header item in the adapter.
          * @return int. Layout resource id.
          */
-        fun getHeaderLayout(headerPosition: Int): Int
+        fun getHeaderLayout(): Int
 
         /**
          * This method gets called by [StickHeaderItemDecoration] to setup the header View.

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.gustavobarbosa.recyclerviewsectioned.R
+import com.gustavobarbosa.recyclerviewsectioned.lib.StickHeaderItemDecoration
 import kotlinx.android.synthetic.main.activity_main.rvMain
 
 class MainActivity : AppCompatActivity() {
@@ -25,15 +26,35 @@ class MainActivity : AppCompatActivity() {
             BodyModel("Body 0 0"),
             BodyModel("Body 0 1")
         )),
-        HeaderModel("HEADER 3", arrayListOf(
+        HeaderModel("HEADER 4", arrayListOf(
             BodyModel("Body 0 0"),
             BodyModel("Body 0 1")
         )),
-        HeaderModel("HEADER 3", arrayListOf(
+        HeaderModel("HEADER 5", arrayListOf(
             BodyModel("Body 0 0"),
             BodyModel("Body 0 1")
         )),
-        HeaderModel("HEADER 3", arrayListOf(
+        HeaderModel("HEADER 6", arrayListOf(
+            BodyModel("Body 0 0"),
+            BodyModel("Body 0 1")
+        )),
+        HeaderModel("HEADER 7", arrayListOf(
+            BodyModel("Body 0 0"),
+            BodyModel("Body 0 1")
+        )),
+        HeaderModel("HEADER 8", arrayListOf(
+            BodyModel("Body 0 0"),
+            BodyModel("Body 0 1")
+        )),
+        HeaderModel("HEADER 9", arrayListOf(
+            BodyModel("Body 0 0"),
+            BodyModel("Body 0 1")
+        )),
+        HeaderModel("HEADER 10", arrayListOf(
+            BodyModel("Body 0 0"),
+            BodyModel("Body 0 1")
+        )),
+        HeaderModel("HEADER 11", arrayListOf(
             BodyModel("Body 0 0"),
             BodyModel("Body 0 1")
         ))
@@ -45,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
         rvMain.adapter = adapter
+        rvMain.addItemDecoration(StickHeaderItemDecoration(adapter))
         adapter.putList(model)
     }
 }
