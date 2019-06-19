@@ -1,4 +1,4 @@
-package com.gustavobarbosa.recyclerviewsectioned.example.model
+package com.gustavobarbosa.recyclerviewsectioned.model
 
 data class HeaderModel(
     var title: String,

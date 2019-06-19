@@ -1,4 +1,4 @@
-package com.gustavobarbosa.recyclerviewsectioned.lib.model
+package com.gustavobarbosa.gsectionedrecyclerview.model
 
 data class Section(
     var headerOriginalPosition: Int,

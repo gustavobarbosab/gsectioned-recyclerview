@@ -1,4 +1,4 @@
-package com.gustavobarbosa.recyclerviewsectioned.lib.model
+package com.gustavobarbosa.gsectionedrecyclerview.model
 
 interface Header<BODY> {
     fun getListBody(): List<BODY>?

@@ -1,4 +1,4 @@
-package com.gustavobarbosa.recyclerviewsectioned.lib.business
+package com.gustavobarbosa.gsectionedrecyclerview.business
 
 object SectionedAdapterFactory {
     fun createSectionedAdapterManager(listener: SectionedAdapterManager.SectionedManagerListener)

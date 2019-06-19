@@ -1,16 +1,15 @@
-package com.gustavobarbosa.recyclerviewsectioned.example
+package com.gustavobarbosa.recyclerviewsectioned
 
 import android.support.v7.widget.CardView
 import android.view.View
 import android.widget.TextView
-import com.gustavobarbosa.recyclerviewsectioned.R
-import com.gustavobarbosa.recyclerviewsectioned.lib.SectionedRecyclerAdapter
-import com.gustavobarbosa.recyclerviewsectioned.example.model.HeaderModel
+import com.gustavobarbosa.gsectionedrecyclerview.SectionedRecyclerAdapter
+import com.gustavobarbosa.recyclerviewsectioned.model.HeaderModel
 
-class MainRecyclerAdapter(private val listener: MainRecyclerAdapter.OnClickListener) :
-    SectionedRecyclerAdapter<
-        MainRecyclerAdapter.HeaderViewHolder,
-        MainRecyclerAdapter.BodyViewHolder>() {
+class MainRecyclerAdapter(private val listener: OnClickListener) :
+    com.gustavobarbosa.gsectionedrecyclerview.SectionedRecyclerAdapter<
+            MainRecyclerAdapter.HeaderViewHolder,
+            MainRecyclerAdapter.BodyViewHolder>() {
 
     private var list: MutableList<HeaderModel> = mutableListOf()
 
@@ -27,9 +26,11 @@ class MainRecyclerAdapter(private val listener: MainRecyclerAdapter.OnClickListe
         notifySectionedRangeChanged(previousSize,newSize)
     }
 
-    override fun onCreateHeaderViewHolder(view: View): HeaderViewHolder = HeaderViewHolder(view)
+    override fun onCreateHeaderViewHolder(view: View): HeaderViewHolder =
+        HeaderViewHolder(view)
 
-    override fun onCreateBodyViewHolder(view: View): BodyViewHolder = BodyViewHolder(view)
+    override fun onCreateBodyViewHolder(view: View): BodyViewHolder =
+        BodyViewHolder(view)
 
     override fun onBindHeaderViewHolder(viewHolder: HeaderViewHolder, headerPosition: Int) {
         val header = list[headerPosition]
@@ -54,11 +55,11 @@ class MainRecyclerAdapter(private val listener: MainRecyclerAdapter.OnClickListe
 
     override fun getHeaderSize(): Int = list.size
 
-    class HeaderViewHolder(view: View) : SectionedRecyclerAdapter.SectionedHeaderViewHolder(view) {
+    class HeaderViewHolder(view: View) : com.gustavobarbosa.gsectionedrecyclerview.SectionedRecyclerAdapter.SectionedHeaderViewHolder(view) {
         val title: TextView = view.findViewById(R.id.tvHeaderMain)
     }
 
-    class BodyViewHolder(view: View) : SectionedRecyclerAdapter.SectionedBodyViewHolder(view) {
+    class BodyViewHolder(view: View) : com.gustavobarbosa.gsectionedrecyclerview.SectionedRecyclerAdapter.SectionedBodyViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.tvBodyMain)
         val contentText: TextView = view.findViewById(R.id.tvBodyContentMain)
         val container: CardView = view.findViewById(R.id.cvContainerMain)

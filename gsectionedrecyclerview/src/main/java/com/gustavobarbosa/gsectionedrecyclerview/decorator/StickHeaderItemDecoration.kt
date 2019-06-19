@@ -1,4 +1,4 @@
-package com.gustavobarbosa.recyclerviewsectioned.lib.decorator
+package com.gustavobarbosa.gsectionedrecyclerview.decorator
 
 import android.graphics.Canvas
 import android.support.v7.widget.RecyclerView

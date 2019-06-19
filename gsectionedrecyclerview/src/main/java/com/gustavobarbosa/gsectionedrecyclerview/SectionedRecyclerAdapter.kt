@@ -1,16 +1,16 @@
-package com.gustavobarbosa.recyclerviewsectioned.lib
+package com.gustavobarbosa.gsectionedrecyclerview
 
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gustavobarbosa.recyclerviewsectioned.lib.business.SectionedAdapterFactory
-import com.gustavobarbosa.recyclerviewsectioned.lib.business.SectionedAdapterManager
-import com.gustavobarbosa.recyclerviewsectioned.lib.decorator.StickHeaderItemDecoration
-import com.gustavobarbosa.recyclerviewsectioned.lib.model.ItemType
-import com.gustavobarbosa.recyclerviewsectioned.lib.model.ItemType.Companion.BODY
-import com.gustavobarbosa.recyclerviewsectioned.lib.model.ItemType.Companion.HEADER
+import com.gustavobarbosa.gsectionedrecyclerview.business.SectionedAdapterFactory
+import com.gustavobarbosa.gsectionedrecyclerview.business.SectionedAdapterManager
+import com.gustavobarbosa.gsectionedrecyclerview.decorator.StickHeaderItemDecoration
+import com.gustavobarbosa.gsectionedrecyclerview.model.ItemType
+import com.gustavobarbosa.gsectionedrecyclerview.model.ItemType.Companion.BODY
+import com.gustavobarbosa.gsectionedrecyclerview.model.ItemType.Companion.HEADER
 
 abstract class SectionedRecyclerAdapter<
     HEADER_VIEW_HOLDER : SectionedRecyclerAdapter.SectionedViewHolder,
