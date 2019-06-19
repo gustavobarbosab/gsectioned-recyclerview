@@ -133,5 +133,17 @@ fun setList(newList: List<HeaderModel>) {
 
 ```
 
+## Usando o header fixo
+Para usar o header fixo no topo, como mostra no gif acima. Basta adicionar o StickHeaderItemDecoration em seu RecyclerView.
+
+```kotlin
+private fun setupRecyclerView() {
+	rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+	rvMain.adapter = adapter
+	rvMain.addItemDecoration(StickHeaderItemDecoration(adapter))
+	adapter.setList(model)
+}
+```
+
 ## Dúvidas e sugestões
 Email: gustavobarbosabarreto@gmail.com
