@@ -1,6 +1,6 @@
 package com.gustavobarbosa.recyclerviewsectioned.ui
 
-import com.gustavobarbosa.recyclerviewsectioned.lib.Header
+import com.gustavobarbosa.recyclerviewsectioned.lib.model.Header
 
 data class HeaderModel(
     var title: String,

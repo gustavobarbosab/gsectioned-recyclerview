@@ -6,7 +6,8 @@ import com.gustavobarbosa.recyclerviewsectioned.R
 import com.gustavobarbosa.recyclerviewsectioned.lib.SectionedRecyclerAdapter
 
 class MainActivityRecyclerAdapter :
-    SectionedRecyclerAdapter<MainActivityRecyclerAdapter.HeaderViewHolder,
+    SectionedRecyclerAdapter<
+        MainActivityRecyclerAdapter.HeaderViewHolder,
         MainActivityRecyclerAdapter.BodyViewHolder,
         List<HeaderModel>>() {
 
@@ -21,7 +22,7 @@ class MainActivityRecyclerAdapter :
 
     override fun onCreateHeaderViewHolder(view: View): HeaderViewHolder = HeaderViewHolder(view)
 
-    override fun onCreateBodyViewHolder(view: View): BodyViewHolder =  BodyViewHolder(view)
+    override fun onCreateBodyViewHolder(view: View): BodyViewHolder = BodyViewHolder(view)
 
     override fun onBindHeaderViewHolder(viewHolder: HeaderViewHolder, headerPosition: Int) {
         val header = list[headerPosition]
@@ -41,6 +42,7 @@ class MainActivityRecyclerAdapter :
     class HeaderViewHolder(view: View) : SectionedRecyclerAdapter.SectionedHeaderViewHolder(view) {
         val title: TextView = view.findViewById(R.id.tvHeaderMain)
     }
+
     class BodyViewHolder(view: View) : SectionedRecyclerAdapter.SectionedBodyViewHolder(view) {
         val title: TextView = view.findViewById(R.id.tvBodyMain)
     }

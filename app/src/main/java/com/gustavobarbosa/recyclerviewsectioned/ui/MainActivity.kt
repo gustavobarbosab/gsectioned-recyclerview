@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.gustavobarbosa.recyclerviewsectioned.R
-import com.gustavobarbosa.recyclerviewsectioned.lib.StickHeaderItemDecoration
+import com.gustavobarbosa.recyclerviewsectioned.lib.decorator.StickHeaderItemDecoration
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,24 +14,6 @@ class MainActivity : AppCompatActivity() {
     private val model
     get() = mutableListOf(
         HeaderModel("HEADER $calc", arrayListOf(
-            BodyModel("Body 0 0"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 1")
         )),
         HeaderModel("HEADER 1", arrayListOf(
             BodyModel("Body 1 0"),
