@@ -7,7 +7,7 @@ import com.gustavobarbosa.gsectionedrecyclerview.SectionedRecyclerAdapter
 import com.gustavobarbosa.recyclerviewsectioned.model.HeaderModel
 
 class MainRecyclerAdapter(private val listener: OnClickListener) :
-    com.gustavobarbosa.gsectionedrecyclerview.SectionedRecyclerAdapter<
+            SectionedRecyclerAdapter<
             MainRecyclerAdapter.HeaderViewHolder,
             MainRecyclerAdapter.BodyViewHolder>() {
 
@@ -55,11 +55,11 @@ class MainRecyclerAdapter(private val listener: OnClickListener) :
 
     override fun getHeaderSize(): Int = list.size
 
-    class HeaderViewHolder(view: View) : com.gustavobarbosa.gsectionedrecyclerview.SectionedRecyclerAdapter.SectionedHeaderViewHolder(view) {
+    class HeaderViewHolder(view: View) : SectionedRecyclerAdapter.SectionedHeaderViewHolder(view) {
         val title: TextView = view.findViewById(R.id.tvHeaderMain)
     }
 
-    class BodyViewHolder(view: View) : com.gustavobarbosa.gsectionedrecyclerview.SectionedRecyclerAdapter.SectionedBodyViewHolder(view) {
+    class BodyViewHolder(view: View) : SectionedRecyclerAdapter.SectionedBodyViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.tvBodyMain)
         val contentText: TextView = view.findViewById(R.id.tvBodyContentMain)
         val container: CardView = view.findViewById(R.id.cvContainerMain)
