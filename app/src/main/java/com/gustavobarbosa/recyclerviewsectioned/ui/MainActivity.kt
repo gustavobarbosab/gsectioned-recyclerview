@@ -5,12 +5,15 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.gustavobarbosa.recyclerviewsectioned.R
 import com.gustavobarbosa.recyclerviewsectioned.lib.StickHeaderItemDecoration
-import kotlinx.android.synthetic.main.activity_main.rvMain
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val model = mutableListOf(
-        HeaderModel("HEADER 0", arrayListOf(
+    private var calc = 0
+
+    private val model
+    get() = mutableListOf(
+        HeaderModel("HEADER $calc", arrayListOf(
             BodyModel("Body 0 0"),
             BodyModel("Body 0 1"),
             BodyModel("Body 0 1"),
@@ -167,5 +170,10 @@ class MainActivity : AppCompatActivity() {
         rvMain.adapter = adapter
         rvMain.addItemDecoration(StickHeaderItemDecoration(adapter))
         adapter.putList(model)
+        swipeRefresh.setOnRefreshListener {
+            calc++
+            adapter.putList(model)
+            swipeRefresh.isRefreshing = false
+        }
     }
 }
