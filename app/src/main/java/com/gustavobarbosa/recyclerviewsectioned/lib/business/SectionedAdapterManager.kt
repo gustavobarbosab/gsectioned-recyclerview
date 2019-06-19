@@ -4,7 +4,7 @@ interface SectionedAdapterManager {
 
     fun mapPositionsAtInterval(start: Int, end: Int)
 
-    fun mapPositions(headerSize: Int)
+    fun mapAllPositions(headerSize: Int)
 
     fun headerPositionInRecycler(position: Int): Int
 

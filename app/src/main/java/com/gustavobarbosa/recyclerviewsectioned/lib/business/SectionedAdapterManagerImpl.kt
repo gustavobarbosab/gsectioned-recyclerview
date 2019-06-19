@@ -12,8 +12,8 @@ class SectionedAdapterManagerImpl(
     // <HEADER_START_AT_RECYCLER_VIEW, Section(POSITION_HEADER_AT_ORIGINAL_LIST,BODY_SIZE)>
     private var headerTreeMap = TreeMap<Int, Section>()
 
-    override fun mapPositions(headerSize: Int) {
-        mapPositionsAtInterval(ZERO, headerSize)
+    override fun mapAllPositions(headersSize: Int) {
+        mapPositionsAtInterval(ZERO, headersSize)
     }
 
     override fun mapPositionsAtInterval(start: Int, end: Int) {

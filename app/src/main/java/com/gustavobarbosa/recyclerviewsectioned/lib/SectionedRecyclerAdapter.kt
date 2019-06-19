@@ -121,7 +121,7 @@ abstract class SectionedRecyclerAdapter<
     }
 
     private fun mapAllPositions() {
-        adapterManager.mapPositions(getHeaderSize())
+        adapterManager.mapAllPositions(getHeaderSize())
     }
 
     private fun mountView(parent: ViewGroup, @LayoutRes layoutRes: Int) =
