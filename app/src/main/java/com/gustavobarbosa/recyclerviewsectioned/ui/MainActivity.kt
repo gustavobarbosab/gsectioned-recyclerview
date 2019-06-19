@@ -8,15 +8,15 @@ import kotlinx.android.synthetic.main.activity_main.rvMain
 
 class MainActivity : AppCompatActivity() {
 
-    val model = mutableListOf(
+    private val model = mutableListOf(
         HeaderModel("HEADER 0", arrayListOf(
             BodyModel("Body 0 0"),
-            BodyModel("Body 0 1"),
-            BodyModel("Body 0 2")
+            BodyModel("Body 0 1")
         )),
         HeaderModel("HEADER 1", arrayListOf(
-            BodyModel("Body 1 0")
-        )),
+            BodyModel("Body 1 0"),
+            BodyModel("Body 0 0")
+            )),
         HeaderModel("HEADER 2", arrayListOf(
             BodyModel("Body 0 0"),
             BodyModel("Body 0 1")
@@ -25,23 +25,15 @@ class MainActivity : AppCompatActivity() {
             BodyModel("Body 0 0"),
             BodyModel("Body 0 1")
         )),
-        HeaderModel("HEADER 4", arrayListOf(
+        HeaderModel("HEADER 3", arrayListOf(
             BodyModel("Body 0 0"),
             BodyModel("Body 0 1")
         )),
-        HeaderModel("HEADER 5", arrayListOf(
+        HeaderModel("HEADER 3", arrayListOf(
             BodyModel("Body 0 0"),
             BodyModel("Body 0 1")
         )),
-        HeaderModel("HEADER 6", arrayListOf(
-            BodyModel("Body 0 0"),
-            BodyModel("Body 0 1")
-        )),
-        HeaderModel("HEADER 7", arrayListOf(
-            BodyModel("Body 0 0"),
-            BodyModel("Body 0 1")
-        )),
-        HeaderModel("HEADER 8", arrayListOf(
+        HeaderModel("HEADER 3", arrayListOf(
             BodyModel("Body 0 0"),
             BodyModel("Body 0 1")
         ))
