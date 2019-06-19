@@ -89,4 +89,12 @@ abstract class SectionedRecyclerAdapter<
         @ItemType
         abstract fun getSectionId(): Int
     }
+
+    abstract class SectionedHeaderViewHolder(view: View) : SectionedViewHolder(view) {
+        override fun getSectionId(): Int = HEADER
+    }
+
+    abstract class SectionedBodyViewHolder(view: View) : SectionedViewHolder(view) {
+        override fun getSectionId(): Int = BODY
+    }
 }

@@ -43,14 +43,10 @@ class MainActivityRecyclerAdapter :
         viewHolder.title.text = body.value
     }
 
-    class HeaderViewHolder(view: View) : SectionedRecyclerAdapter.SectionedViewHolder(view) {
-        override fun getSectionId(): Int = ItemType.HEADER
-
+    class HeaderViewHolder(view: View) : SectionedRecyclerAdapter.SectionedHeaderViewHolder(view) {
         val title: TextView = view.findViewById(R.id.tvHeaderMain)
     }
-    class BodyViewHolder(view: View) : SectionedRecyclerAdapter.SectionedViewHolder(view) {
-        override fun getSectionId(): Int = ItemType.BODY
-
+    class BodyViewHolder(view: View) : SectionedRecyclerAdapter.SectionedBodyViewHolder(view) {
         val title: TextView = view.findViewById(R.id.tvBodyMain)
     }
 }
