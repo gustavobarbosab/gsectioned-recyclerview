@@ -1,5 +1,5 @@
 package com.gustavobarbosa.recyclerviewsectioned.lib
 
-interface Header {
-    fun getListBody(): List<Body>?
+interface Header<BODY> {
+    fun getListBody(): List<BODY>?
 }

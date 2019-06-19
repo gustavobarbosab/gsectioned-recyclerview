@@ -12,7 +12,7 @@ import java.util.TreeMap
 abstract class SectionedRecyclerAdapter<
         HEADER_VH : SectionedRecyclerAdapter.SectionedViewHolder,
         BODY_VH : SectionedRecyclerAdapter.SectionedViewHolder,
-        HEADER : List<Header>
+        HEADER_MODEL : List<Header<*>>
         > : RecyclerView.Adapter<SectionedRecyclerAdapter.SectionedViewHolder>(),
     StickHeaderItemDecoration.StickyHeaderInterface {
 
@@ -20,7 +20,7 @@ abstract class SectionedRecyclerAdapter<
     var hash = TreeMap<Int, Section>() // <HEADER_START,BODY_SIZE>
     var actualRange: IntRange = IntRange.EMPTY
 
-    open fun putList(newList: HEADER) {
+    open fun putList(newList: HEADER_MODEL) {
         totalSize = 0
         hash.clear()
         var headerOriginalPosition = 0
