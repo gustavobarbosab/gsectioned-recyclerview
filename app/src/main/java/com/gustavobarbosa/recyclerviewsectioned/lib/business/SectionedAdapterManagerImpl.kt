@@ -4,21 +4,21 @@ import com.gustavobarbosa.recyclerviewsectioned.lib.model.Section
 import java.util.TreeMap
 
 class SectionedAdapterManagerImpl(
-    private val listener: SectionedAdapterManager.SectionedManagerListener)
-    : SectionedAdapterManager {
+    private val listener: SectionedAdapterManager.SectionedManagerListener
+) : SectionedAdapterManager {
 
-    private var totalSize = 0
-    private var headerTreeMap = TreeMap<Int, Section>() // <HEADER_START,BODY_SIZE>
+    // Total size of RecyclerView items
+    private var totalSize = ZERO
+    // <HEADER_START_AT_RECYCLER_VIEW, Section(POSITION_HEADER_AT_ORIGINAL_LIST,BODY_SIZE)>
+    private var headerTreeMap = TreeMap<Int, Section>()
 
     override fun mapPositions(headerSize: Int) {
-        resetVariables()
-        for (headerOriginalPosition in 0 until headerSize) {
-            val bodySize = calcBodySize(headerOriginalPosition)
-            if (isBodyNotEmpty(bodySize)) {
-                mountHeaderTreeMap(headerOriginalPosition, bodySize)
-                reCalcTotal(bodySize)
-            }
-        }
+        mapPositionsAtInterval(ZERO, headerSize)
+    }
+
+    override fun mapPositionsAtInterval(start: Int, end: Int) {
+        evaluateResetMapping(start)
+        calcHeaderPositions(start, end)
     }
 
     override fun headerPositionInRecycler(position: Int): Int = headerTreeMap.floorEntry(position).key
@@ -34,21 +34,45 @@ class SectionedAdapterManagerImpl(
 
     override fun totalSize(): Int = totalSize
 
-    private fun reCalcTotal(bodySize: Int) {
-        totalSize += bodySize + 1 // total is body size + header + previous total
+    private fun evaluateResetMapping(start: Int) {
+        if (start == ZERO) {
+            resetMapping()
+        }
     }
+
+    private fun calcHeaderPositions(start: Int, end: Int) {
+        for (headerOriginalPosition in start until end) {
+            val bodySize = calcBodySize(headerOriginalPosition)
+            evaluateHeaderMounting(bodySize, headerOriginalPosition)
+        }
+    }
+
+    private fun calcBodySize(headerOriginalPosition: Int) = listener.bodySize(headerOriginalPosition)
+
+    private fun evaluateHeaderMounting(bodySize: Int, headerOriginalPosition: Int) {
+        if (isBodyNotEmpty(bodySize)) {
+            mountHeaderTreeMap(headerOriginalPosition, bodySize)
+            calcTotalSize(bodySize)
+        }
+    }
+
+    private fun isBodyNotEmpty(body: Int) = body != ZERO
 
     private fun mountHeaderTreeMap(headerOriginalPosition: Int, bodySize: Int) {
         headerTreeMap[totalSize] =
             Section(headerOriginalPosition = headerOriginalPosition, bodySize = bodySize)
     }
 
-    private fun calcBodySize(headerOriginalPosition: Int) = listener.bodySize(headerOriginalPosition)
+    private fun calcTotalSize(bodySize: Int) {
+        totalSize += bodySize + 1 // total is body size + header + previous total
+    }
 
-    private fun isBodyNotEmpty(body: Int) = body != 0
-
-    private fun resetVariables() {
-        totalSize = 0
+    private fun resetMapping() {
+        totalSize = ZERO
         headerTreeMap.clear()
+    }
+
+    companion object {
+        private const val ZERO = 0
     }
 }

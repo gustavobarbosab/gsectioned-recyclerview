@@ -6,17 +6,24 @@ import com.gustavobarbosa.recyclerviewsectioned.R
 import com.gustavobarbosa.recyclerviewsectioned.lib.SectionedRecyclerAdapter
 import com.gustavobarbosa.recyclerviewsectioned.example.model.HeaderModel
 
-class MainActivityRecyclerAdapter(val listener: MainActivityRecyclerAdapter.OnClickListener) :
+class MainRecyclerAdapter(private val listener: MainRecyclerAdapter.OnClickListener) :
     SectionedRecyclerAdapter<
-        MainActivityRecyclerAdapter.HeaderViewHolder,
-        MainActivityRecyclerAdapter.BodyViewHolder>() {
+        MainRecyclerAdapter.HeaderViewHolder,
+        MainRecyclerAdapter.BodyViewHolder>() {
 
     private var list: MutableList<HeaderModel> = mutableListOf()
 
-    fun putList(newList: List<HeaderModel>) {
+    fun setList(newList: List<HeaderModel>) {
         list.clear()
         list.addAll(newList)
-        notifyDataChanged()
+        notifySectionedDataChanged()
+    }
+
+    fun addList(newItems: List<HeaderModel>) {
+        val previousSize = list.size
+        list.addAll(newItems)
+        val newSize = list.size
+        notifySectionedRangeChanged(previousSize,newSize)
     }
 
     override fun onCreateHeaderViewHolder(view: View): HeaderViewHolder = HeaderViewHolder(view)

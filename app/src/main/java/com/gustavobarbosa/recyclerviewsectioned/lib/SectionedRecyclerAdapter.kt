@@ -78,9 +78,14 @@ abstract class SectionedRecyclerAdapter<
 
     override fun getItemCount(): Int = adapterManager.totalSize()
 
-    fun notifyDataChanged() {
-        reloadList()
+    fun notifySectionedDataChanged() {
+        mapAllPositions()
         notifyDataSetChanged()
+    }
+
+    fun notifySectionedRangeChanged(start: Int, end: Int) {
+        mapPositionsAtInterval(start,end)
+        notifyItemRangeChanged(start,end)
     }
 
     abstract fun onCreateHeaderViewHolder(view: View): HEADER_VIEW_HOLDER
@@ -111,7 +116,11 @@ abstract class SectionedRecyclerAdapter<
 
     abstract fun getHeaderSize(): Int
 
-    private fun reloadList() {
+    private fun mapPositionsAtInterval(start: Int, end: Int) {
+        adapterManager.mapPositionsAtInterval(start,end)
+    }
+
+    private fun mapAllPositions() {
         adapterManager.mapPositions(getHeaderSize())
     }
 
