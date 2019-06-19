@@ -48,18 +48,18 @@ class MainRecyclerAdapter :
 ```
 4. Feito os passos acima, partiremos para a implementação do adapter
 
-    1. getBodyLayout():
+    * getBodyLayout():
     Deverá retornar somente o id do layout do Body.
     ```kotlin
     override fun getBodyLayout(): Int = R.layout.item_body_main
     ```
 
-    2. getHeaderLayout():
+    * getHeaderLayout():
     Deverá retornar somente o id do layout do Header.
     ```kotlin
     override fun getHeaderLayout(): Int = R.layout.item_header_main
     ```
-    3. onCreateHeaderViewHolder(view: View): 
+    * onCreateHeaderViewHolder(view: View): 
     O método recebe como parametro a view já inflada, portanto, basta passá-la no construtor do seu ViewHolder.
 
     ```kotlin
@@ -67,24 +67,24 @@ class MainRecyclerAdapter :
             HeaderViewHolder(view)
     ```
     
-    4. onCreateBodyViewHolder(view: View):
+    * onCreateBodyViewHolder(view: View):
     O mesmo ocorrerá para o Body.
 
     ```kotlin
     override fun onCreateBodyViewHolder(view: View): BodyViewHolder =
             BodyViewHolder(view)
     ```
-    5. getHeaderSize()
+    * getHeaderSize()
     Deve retornar o tamanho da lista de Headers.
     ```kotlin
     override fun getHeaderSize(): Int = list.size
     ```
-    6. getBodySize(headerPosition: Int)
+    * getBodySize(headerPosition: Int)
     Deve retornar o tamanho do Body de determinado Header.
     ```kotlin
     override fun getBodySize(headerPosition: Int): Int = list[headerPosition].bodies.size
     ```
-    7. onBindHeaderViewHolder(viewHolder: HeaderViewHolder, headerPosition: Int) 
+    * onBindHeaderViewHolder(viewHolder: HeaderViewHolder, headerPosition: Int) 
     Aqui é feito o bind do Header View Holder, conforme ocorre no Adapter convencional.
     ```kotlin
     override fun onBindHeaderViewHolder(viewHolder: HeaderViewHolder, headerPosition: Int) {
@@ -93,7 +93,7 @@ class MainRecyclerAdapter :
     }
     ```
     
-    8. onBindBodyViewHolder(viewHolder: BodyViewHolder, headerPosition: Int, bodyPosition: Int)
+    * onBindBodyViewHolder(viewHolder: BodyViewHolder, headerPosition: Int, bodyPosition: Int)
     Aqui é feito o bind do Body View Holder, conforme ocorre no Adapter convencional.
 
     ```kotlin
