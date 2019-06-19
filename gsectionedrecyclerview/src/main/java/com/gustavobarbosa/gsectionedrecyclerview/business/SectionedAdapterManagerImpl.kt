@@ -1,6 +1,6 @@
-package com.gustavobarbosa.recyclerviewsectioned.lib.business
+package com.gustavobarbosa.gsectionedrecyclerview.business
 
-import com.gustavobarbosa.recyclerviewsectioned.lib.model.Section
+import com.gustavobarbosa.gsectionedrecyclerview.model.Section
 import java.util.TreeMap
 
 class SectionedAdapterManagerImpl(
@@ -8,7 +8,8 @@ class SectionedAdapterManagerImpl(
 ) : SectionedAdapterManager {
 
     // Total size of RecyclerView items
-    private var totalSize = ZERO
+    private var totalSize =
+        ZERO
     // <HEADER_START_AT_RECYCLER_VIEW, Section(POSITION_HEADER_AT_ORIGINAL_LIST,BODY_SIZE)>
     private var headerTreeMap = TreeMap<Int, Section>()
 
@@ -60,7 +61,10 @@ class SectionedAdapterManagerImpl(
 
     private fun mountHeaderTreeMap(headerOriginalPosition: Int, bodySize: Int) {
         headerTreeMap[totalSize] =
-            Section(headerOriginalPosition = headerOriginalPosition, bodySize = bodySize)
+            Section(
+                headerOriginalPosition = headerOriginalPosition,
+                bodySize = bodySize
+            )
     }
 
     private fun calcTotalSize(bodySize: Int) {

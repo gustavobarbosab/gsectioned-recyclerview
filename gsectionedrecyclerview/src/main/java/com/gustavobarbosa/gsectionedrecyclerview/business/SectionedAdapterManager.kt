@@ -1,4 +1,4 @@
-package com.gustavobarbosa.recyclerviewsectioned.lib.business
+package com.gustavobarbosa.gsectionedrecyclerview.business
 
 interface SectionedAdapterManager {
 
