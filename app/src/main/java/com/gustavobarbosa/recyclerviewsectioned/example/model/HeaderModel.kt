@@ -1,4 +1,4 @@
-package com.gustavobarbosa.recyclerviewsectioned.ui
+package com.gustavobarbosa.recyclerviewsectioned.example.model
 
 import com.gustavobarbosa.recyclerviewsectioned.lib.model.Header
 

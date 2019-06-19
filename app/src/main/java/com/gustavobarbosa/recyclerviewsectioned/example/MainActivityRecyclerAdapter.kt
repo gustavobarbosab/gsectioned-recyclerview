@@ -1,9 +1,10 @@
-package com.gustavobarbosa.recyclerviewsectioned.ui
+package com.gustavobarbosa.recyclerviewsectioned.example
 
 import android.view.View
 import android.widget.TextView
 import com.gustavobarbosa.recyclerviewsectioned.R
 import com.gustavobarbosa.recyclerviewsectioned.lib.SectionedRecyclerAdapter
+import com.gustavobarbosa.recyclerviewsectioned.example.model.HeaderModel
 
 class MainActivityRecyclerAdapter :
     SectionedRecyclerAdapter<
