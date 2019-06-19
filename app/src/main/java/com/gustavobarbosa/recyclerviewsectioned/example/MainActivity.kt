@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
             calc++
             adapter.addList(
                 listOf(
-                    HeaderModel("Gustavo added", listOf(BodyModel("olá"))),
-                    HeaderModel("Mitoso added", listOf(BodyModel("olá2")))
+                    HeaderModel("Gustavo added", listOf(BodyModel("olá", "asdasdasdasda" ))),
+                    HeaderModel("Mitoso added", listOf(BodyModel("olá2", "asdasdasdasda")))
                 )
             )
 

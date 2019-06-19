@@ -1,5 +1,6 @@
 package com.gustavobarbosa.recyclerviewsectioned.example
 
+import android.support.v7.widget.CardView
 import android.view.View
 import android.widget.TextView
 import com.gustavobarbosa.recyclerviewsectioned.R
@@ -38,9 +39,10 @@ class MainRecyclerAdapter(private val listener: MainRecyclerAdapter.OnClickListe
     override fun onBindBodyViewHolder(viewHolder: BodyViewHolder, headerPosition: Int, bodyPosition: Int) {
         val header = list[headerPosition]
         val body = header.bodies[bodyPosition]
-        viewHolder.title.text = body.value
-        viewHolder.title.setOnClickListener {
-            listener.onItemClicked("header:$headerPosition body:$bodyPosition")
+        viewHolder.titleText.text = body.value
+        viewHolder.contentText.text = body.content
+        viewHolder.container.setOnClickListener {
+            listener.onItemClicked("header:$headerPosition\n body:$bodyPosition")
         }
     }
 
@@ -57,7 +59,9 @@ class MainRecyclerAdapter(private val listener: MainRecyclerAdapter.OnClickListe
     }
 
     class BodyViewHolder(view: View) : SectionedRecyclerAdapter.SectionedBodyViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.tvBodyMain)
+        val titleText: TextView = view.findViewById(R.id.tvBodyMain)
+        val contentText: TextView = view.findViewById(R.id.tvBodyContentMain)
+        val container: CardView = view.findViewById(R.id.cvContainerMain)
     }
 
     interface OnClickListener {
