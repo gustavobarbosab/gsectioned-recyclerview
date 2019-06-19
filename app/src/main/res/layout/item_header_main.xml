@@ -13,6 +13,7 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:background="@color/colorPrimary"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
