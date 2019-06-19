@@ -110,6 +110,29 @@ class MainRecyclerAdapter :
         viewHolder.titleText.text = body.value
     }
     ```
+## INFORMAÇÕES IMPORTANTES: 
+De modo a fazer os calculos necessários para manipulação das posições de Header e Body, ao notificar alterações no adapter, usar os seguintes métodos.
+
+### Notificar alteração em toda lista
+```kotlin
+fun setList(newList: List<HeaderModel>) {
+        list.clear()
+        list.addAll(newList)
+        notifySectionedDataChanged() // Use este método
+    }
+```
+
+### Notificar alteração por inclusão de itens em determinado intervalo
+```kotlin
+// Exemplo de inclusão no fim da lista
+fun addList(newItems: List<HeaderModel>) {
+        val previousSize = list.size
+        list.addAll(newItems)
+        val newSize = list.size
+        notifySectionedRangeChanged(previousSize,newSize)
+    }
+
+```
 
 ## Dúvidas e sugestões
 Email: gustavobarbosabarreto@gmail.com
