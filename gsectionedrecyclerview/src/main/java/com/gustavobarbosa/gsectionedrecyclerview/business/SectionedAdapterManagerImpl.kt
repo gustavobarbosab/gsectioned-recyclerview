@@ -8,18 +8,13 @@ class SectionedAdapterManagerImpl(
 ) : SectionedAdapterManager {
 
     // Total size of RecyclerView items
-    private var totalSize =
-        ZERO
+    private var totalSize = ZERO
     // <HEADER_START_AT_RECYCLER_VIEW, Section(POSITION_HEADER_AT_ORIGINAL_LIST,BODY_SIZE)>
     private var headerTreeMap = TreeMap<Int, Section>()
 
-    override fun mapAllPositions(headersSize: Int) {
-        mapPositionsAtInterval(ZERO, headersSize)
-    }
-
-    override fun mapPositionsAtInterval(start: Int, end: Int) {
-        evaluateResetMapping(start)
-        calcHeaderPositions(start, end)
+    override fun mapPositions(headerSize: Int) {
+        resetMapping()
+        calcHeaderPositions(headerSize)
     }
 
     override fun headerPositionInRecycler(position: Int): Int = headerTreeMap.floorEntry(position).key
@@ -35,14 +30,8 @@ class SectionedAdapterManagerImpl(
 
     override fun totalSize(): Int = totalSize
 
-    private fun evaluateResetMapping(start: Int) {
-        if (start == ZERO) {
-            resetMapping()
-        }
-    }
-
-    private fun calcHeaderPositions(start: Int, end: Int) {
-        for (headerOriginalPosition in start until end) {
+    private fun calcHeaderPositions(headerSize: Int) {
+        for (headerOriginalPosition in ZERO until headerSize) {
             val bodySize = calcBodySize(headerOriginalPosition)
             evaluateHeaderMounting(bodySize, headerOriginalPosition)
         }

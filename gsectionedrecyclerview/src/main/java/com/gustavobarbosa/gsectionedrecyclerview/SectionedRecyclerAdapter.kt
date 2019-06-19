@@ -13,13 +13,13 @@ import com.gustavobarbosa.gsectionedrecyclerview.model.ItemType.Companion.BODY
 import com.gustavobarbosa.gsectionedrecyclerview.model.ItemType.Companion.HEADER
 
 abstract class SectionedRecyclerAdapter<
-    HEADER_VIEW_HOLDER : SectionedRecyclerAdapter.SectionedViewHolder,
-    BODY_VIEW_HOLDER : SectionedRecyclerAdapter.SectionedViewHolder> :
+        HEADER_VIEW_HOLDER : SectionedRecyclerAdapter.SectionedViewHolder,
+        BODY_VIEW_HOLDER : SectionedRecyclerAdapter.SectionedViewHolder> :
     RecyclerView.Adapter<SectionedRecyclerAdapter.SectionedViewHolder>(),
     StickHeaderItemDecoration.StickyHeaderInterface {
 
-    private val listener = object: SectionedAdapterManager.SectionedManagerListener {
-        override fun bodySize(headerPosition: Int): Int  = getBodySize(headerPosition)
+    private val listener = object : SectionedAdapterManager.SectionedManagerListener {
+        override fun bodySize(headerPosition: Int): Int = getBodySize(headerPosition)
     }
 
     private val adapterManager = SectionedAdapterFactory.createSectionedAdapterManager(listener)
@@ -41,7 +41,7 @@ abstract class SectionedRecyclerAdapter<
         when (viewHolder.getSectionId()) {
             HEADER -> {
                 onBindHeaderViewHolder(
-                    viewHolder as HEADER_VIEW_HOLDER ,
+                    viewHolder as HEADER_VIEW_HOLDER,
                     adapterManager.headerPositionInOriginalList(position)
                 )
             }
@@ -79,20 +79,20 @@ abstract class SectionedRecyclerAdapter<
     override fun getItemCount(): Int = adapterManager.totalSize()
 
     fun notifySectionedDataChanged() {
-        mapAllPositions()
+        mapPositions()
         notifyDataSetChanged()
     }
 
-    fun notifySectionedRangeChanged(start: Int, end: Int) {
-        mapPositionsAtInterval(start,end)
-        notifyItemRangeChanged(start,end)
+    fun notifySectionedDataAdded(initialIndex: Int) {
+        mapPositions()
+        notifyItemRangeChanged(initialIndex, adapterManager.totalSize())
     }
 
     abstract fun onCreateHeaderViewHolder(view: View): HEADER_VIEW_HOLDER
 
     abstract fun onCreateBodyViewHolder(view: View): BODY_VIEW_HOLDER
 
-    abstract fun onBindHeaderViewHolder(viewHolder: HEADER_VIEW_HOLDER , headerPosition: Int)
+    abstract fun onBindHeaderViewHolder(viewHolder: HEADER_VIEW_HOLDER, headerPosition: Int)
 
     abstract fun onBindBodyViewHolder(viewHolder: BODY_VIEW_HOLDER, headerPosition: Int, bodyPosition: Int)
 
@@ -116,12 +116,8 @@ abstract class SectionedRecyclerAdapter<
 
     abstract fun getHeaderSize(): Int
 
-    private fun mapPositionsAtInterval(start: Int, end: Int) {
-        adapterManager.mapPositionsAtInterval(start,end)
-    }
-
-    private fun mapAllPositions() {
-        adapterManager.mapAllPositions(getHeaderSize())
+    private fun mapPositions() {
+        adapterManager.mapPositions(getHeaderSize())
     }
 
     private fun mountView(parent: ViewGroup, @LayoutRes layoutRes: Int) =

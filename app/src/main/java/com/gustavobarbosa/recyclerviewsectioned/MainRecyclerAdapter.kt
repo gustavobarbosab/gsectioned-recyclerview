@@ -20,10 +20,9 @@ class MainRecyclerAdapter(private val listener: OnClickListener) :
     }
 
     fun addList(newItems: List<HeaderModel>) {
-        val previousSize = list.size
-        list.addAll(newItems)
-        val newSize = list.size
-        notifySectionedRangeChanged(previousSize,newSize)
+        val oldSize = itemCount
+        list.addAll(itemCount, newItems)
+        notifySectionedDataAdded(oldSize)
     }
 
     override fun onCreateHeaderViewHolder(view: View): HeaderViewHolder =

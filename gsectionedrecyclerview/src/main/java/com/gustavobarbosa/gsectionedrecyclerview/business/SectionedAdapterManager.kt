@@ -2,9 +2,7 @@ package com.gustavobarbosa.gsectionedrecyclerview.business
 
 interface SectionedAdapterManager {
 
-    fun mapPositionsAtInterval(start: Int, end: Int)
-
-    fun mapAllPositions(headerSize: Int)
+    fun mapPositions(headerSize: Int)
 
     fun headerPositionInRecycler(position: Int): Int
 
