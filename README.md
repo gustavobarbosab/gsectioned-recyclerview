@@ -10,11 +10,11 @@ Abaixo segue um breve exemplo do funcionamento da biblioteca.
 1. Adicione o repositório do jitpack a sua aplicação
 ```
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
 2. Adicione a biblioteca ao seu projeto
 ```
@@ -104,5 +104,5 @@ class MainRecyclerAdapter :
     }
     ```
 
-# Dúvidas e sugestões
+## Dúvidas e sugestões
 Email: gustavobarbosabarreto@gmail.com
