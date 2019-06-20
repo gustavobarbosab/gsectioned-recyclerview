@@ -25,6 +25,11 @@ class MainRecyclerAdapter(private val listener: OnClickListener) :
         notifySectionedItemRangeInserted(0,newItems.size)
     }
 
+    fun removeItem(index: Int) {
+        list.removeAt(index)
+        notifySectionedItemRemoved(index)
+    }
+
     override fun onCreateHeaderViewHolder(parent: ViewGroup): HeaderViewHolder {
         val view = inflateHeader(parent)
         return HeaderViewHolder(view)
