@@ -18,7 +18,7 @@ allprojects {
 ```
 2. Adicione a biblioteca ao seu projeto
 ```
-implementation 'com.github.gustavobarbosab:gsectioned-recyclerview:1.1-BETA'
+implementation 'com.github.gustavobarbosab:gsectioned-recyclerview:1.2-BETA'
 
 ```
 
