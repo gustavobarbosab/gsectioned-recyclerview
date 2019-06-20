@@ -157,5 +157,8 @@ private fun setupRecyclerView() {
 }
 ```
 
+## Projeto de exemplo
+Caso queira um exemplo de como implementar e usar a biblioteca, acesse [GSectioned Example](https://github.com/gustavobarbosab/gsectioned-recyclerview/tree/master/app/src/main/java/com/gustavobarbosa/recyclerviewsectioned).
+
 ## Dúvidas e sugestões
 Email: gustavobarbosabarreto@gmail.com
