@@ -83,9 +83,24 @@ abstract class SectionedRecyclerAdapter<
         notifyDataSetChanged()
     }
 
-    fun notifySectionedDataAdded(initialIndex: Int) {
+    fun notifySectionedItemRangeInserted(positionStart: Int, count: Int) {
         mapPositions()
-        notifyItemRangeChanged(initialIndex, adapterManager.totalSize())
+        notifyItemRangeInserted(positionStart, count)
+    }
+
+    fun notifySectionedItemInserted(position: Int) {
+        mapPositions()
+        notifyItemInserted(position)
+    }
+
+    fun notifySectionedItemRemoved(position: Int) {
+        mapPositions()
+        notifyItemRemoved(position)
+    }
+
+    fun notifySectionedItemRangeRemoved(positionStart: Int, itemCount: Int) {
+        mapPositions()
+        notifyItemRangeRemoved(positionStart,itemCount)
     }
 
     abstract fun onCreateHeaderViewHolder(parent: ViewGroup): HEADER_VIEW_HOLDER
