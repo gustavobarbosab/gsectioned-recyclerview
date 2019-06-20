@@ -27,12 +27,10 @@ abstract class SectionedRecyclerAdapter<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionedViewHolder {
         return when (viewType) {
             HEADER -> {
-                val view = mountView(parent, getHeaderLayout())
-                onCreateHeaderViewHolder(view)
+                onCreateHeaderViewHolder(parent)
             }
             else -> { //BODY
-                val view = mountView(parent, getBodyLayout())
-                onCreateBodyViewHolder(view)
+                onCreateBodyViewHolder(parent)
             }
         }
     }
@@ -66,11 +64,13 @@ abstract class SectionedRecyclerAdapter<
     override fun getHeaderPositionForItem(itemPosition: Int): Int =
         adapterManager.headerPositionInRecycler(itemPosition)
 
-    override fun bindHeaderData(header: View, headerPosition: Int) {
+    override fun bindHeaderData(parent: ViewGroup, headerPosition: Int): View {
+        val viewHolder = onCreateHeaderViewHolder(parent)
         onBindHeaderViewHolder(
-            onCreateHeaderViewHolder(header),
+            viewHolder,
             adapterManager.headerPositionInOriginalList(headerPosition)
         )
+        return viewHolder.itemView
     }
 
     override fun isHeader(itemPosition: Int): Boolean =
@@ -88,9 +88,9 @@ abstract class SectionedRecyclerAdapter<
         notifyItemRangeChanged(initialIndex, adapterManager.totalSize())
     }
 
-    abstract fun onCreateHeaderViewHolder(view: View): HEADER_VIEW_HOLDER
+    abstract fun onCreateHeaderViewHolder(parent: ViewGroup): HEADER_VIEW_HOLDER
 
-    abstract fun onCreateBodyViewHolder(view: View): BODY_VIEW_HOLDER
+    abstract fun onCreateBodyViewHolder(parent: ViewGroup): BODY_VIEW_HOLDER
 
     abstract fun onBindHeaderViewHolder(viewHolder: HEADER_VIEW_HOLDER, headerPosition: Int)
 
@@ -120,6 +120,9 @@ abstract class SectionedRecyclerAdapter<
         adapterManager.mapPositions(getHeaderSize())
     }
 
-    private fun mountView(parent: ViewGroup, @LayoutRes layoutRes: Int) =
-        LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
+    fun inflateHeader(parent: ViewGroup): View =
+        LayoutInflater.from(parent.context).inflate(getHeaderLayout(), parent, false)
+
+    fun inflateBody(parent: ViewGroup): View =
+        LayoutInflater.from(parent.context).inflate(getBodyLayout(), parent, false)
 }

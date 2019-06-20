@@ -2,6 +2,7 @@ package com.gustavobarbosa.recyclerviewsectioned
 
 import android.support.v7.widget.CardView
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import com.gustavobarbosa.gsectionedrecyclerview.SectionedRecyclerAdapter
 import com.gustavobarbosa.recyclerviewsectioned.model.HeaderModel
@@ -25,11 +26,15 @@ class MainRecyclerAdapter(private val listener: OnClickListener) :
         notifySectionedDataAdded(oldSize)
     }
 
-    override fun onCreateHeaderViewHolder(view: View): HeaderViewHolder =
-        HeaderViewHolder(view)
+    override fun onCreateHeaderViewHolder(parent: ViewGroup): HeaderViewHolder {
+        val view = inflateHeader(parent)
+        return HeaderViewHolder(view)
+    }
 
-    override fun onCreateBodyViewHolder(view: View): BodyViewHolder =
-        BodyViewHolder(view)
+    override fun onCreateBodyViewHolder(parent: ViewGroup): BodyViewHolder {
+        val view = inflateBody(parent)
+        return BodyViewHolder(view)
+    }
 
     override fun onBindHeaderViewHolder(viewHolder: HeaderViewHolder, headerPosition: Int) {
         val header = list[headerPosition]

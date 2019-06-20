@@ -2,7 +2,6 @@ package com.gustavobarbosa.gsectionedrecyclerview.decorator
 
 import android.graphics.Canvas
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
@@ -34,10 +33,7 @@ class StickHeaderItemDecoration(private val mListener: StickyHeaderInterface) : 
     }
 
     private fun getHeaderViewForItem(headerPosition: Int, parent: RecyclerView): View {
-        val layoutResId = mListener.getHeaderLayout()
-        val header = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
-        mListener.bindHeaderData(header, headerPosition)
-        return header
+        return mListener.bindHeaderData(parent, headerPosition)
     }
 
     private fun drawHeader(c: Canvas, header: View) {
@@ -128,7 +124,7 @@ class StickHeaderItemDecoration(private val mListener: StickyHeaderInterface) : 
          * @param header View. Header to set the data on.
          * @param headerPosition int. Position of the header item in the adapter.
          */
-        fun bindHeaderData(header: View, headerPosition: Int)
+        fun bindHeaderData(parent: ViewGroup, headerPosition: Int): View
 
         /**
          * This method gets called by [StickHeaderItemDecoration] to verify whether the item represents a header.
