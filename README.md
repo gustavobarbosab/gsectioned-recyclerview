@@ -127,7 +127,7 @@ fun setList(newList: List<HeaderModel>) {
 // Exemplo de inclusão no fim da lista
    fun addList(newItems: List<HeaderModel>) {
         val oldSize = itemCount //Pega o tamanho da lista antes da inclusão dos novos itens
-        list.addAll(itemCount, newItems) // adiciona os itens
+        list.addAll(newItems) // adiciona os itens
         notifySectionedDataAdded(oldSize) // notifica a atualização a partir de onde foram inseridos os novos itens
     }
 
