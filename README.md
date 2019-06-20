@@ -18,7 +18,7 @@ allprojects {
 ```
 2. Adicione a biblioteca ao seu projeto
 ```
-implementation 'com.github.gustavobarbosab:gsectioned-recyclerview:1.0-BETA'
+implementation 'com.github.gustavobarbosab:gsectioned-recyclerview:1.1-BETA'
 
 ```
 
@@ -125,13 +125,24 @@ fun setList(newList: List<HeaderModel>) {
 ### Notificar alteração por inclusão de itens em determinado intervalo
 ```kotlin
 // Exemplo de inclusão no fim da lista
-fun addList(newItems: List<HeaderModel>) {
-        val previousSize = list.size
-        list.addAll(newItems)
-        val newSize = list.size
-        notifySectionedRangeChanged(previousSize,newSize)
+   fun addList(newItems: List<HeaderModel>) {
+        val oldSize = itemCount //Pega o tamanho da lista antes da inclusão dos novos itens
+        list.addAll(itemCount, newItems) // adiciona os itens
+        notifySectionedDataAdded(oldSize) // notifica a atualização a partir de onde foram inseridos os novos itens
     }
 
+```
+
+## Usando o header fixo
+Para usar o header fixo no topo, como mostra no gif acima. Basta adicionar o StickHeaderItemDecoration em seu RecyclerView.
+
+```kotlin
+private fun setupRecyclerView() {
+	rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+	rvMain.adapter = adapter
+	rvMain.addItemDecoration(StickHeaderItemDecoration(adapter))
+	adapter.setList(model)
+}
 ```
 
 ## Dúvidas e sugestões
