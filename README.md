@@ -61,22 +61,26 @@ class MainRecyclerAdapter :
     ```kotlin
     override fun getHeaderLayout(): Int = R.layout.item_header_main
     ```
-    * onCreateHeaderViewHolder(view: View): 
+    * onCreateHeaderViewHolder(parent: ViewGroup): 
     
-    O método recebe como parametro a view já inflada, portanto, basta passá-la no construtor do seu ViewHolder.
+    O método recebe como parametro o viewGroup, que pode ser usado para inflar a view da forma que convier. Caso não esteja usando DataBinding e deseje inflar a view através do LayoutInflater, basta chamar o método inflateHeader, passando o ViewGroup como parametro.
 
     ```kotlin
-    override fun onCreateHeaderViewHolder(view: View): HeaderViewHolder =
-            HeaderViewHolder(view)
+    override fun onCreateHeaderViewHolder(parent: ViewGroup): HeaderViewHolder {
+        val view = inflateHeader(parent)
+        return HeaderViewHolder(view)
+    }
     ```
     
     * onCreateBodyViewHolder(view: View):
     
-    O mesmo ocorrerá para o Body.
+    O mesmo ocorre aqui, basta chamar o método inflateBody, passando o ViewGroup como parametro.
 
     ```kotlin
-    override fun onCreateBodyViewHolder(view: View): BodyViewHolder =
-            BodyViewHolder(view)
+    override fun onCreateBodyViewHolder(parent: ViewGroup): BodyViewHolder {
+        val view = inflateBody(parent)
+        return BodyViewHolder(view)
+    }
     ```
     * getHeaderSize()
     
@@ -122,16 +126,24 @@ fun setList(newList: List<HeaderModel>) {
     }
 ```
 
-### Notificar alteração por inclusão de itens em determinado intervalo
+### Notificar alteração por inclusão de itens 
 ```kotlin
-// Exemplo de inclusão no fim da lista
-   fun addList(newItems: List<HeaderModel>) {
-        val oldSize = itemCount //Pega o tamanho da lista antes da inclusão dos novos itens
-        list.addAll(newItems) // adiciona os itens
-        notifySectionedDataAdded(oldSize) // notifica a atualização a partir de onde foram inseridos os novos itens
+// Exemplo de inclusão no inicio da lista
+    fun addList(newItems: List<HeaderModel>) {
+        list.addAll(0,newItems)
+        notifySectionedItemRangeInserted(0,newItems.size)
     }
-
 ```
+
+### Notificar alteração por exclusão de itens 
+```kotlin
+// Exemplo de exclusão no inicio da lista
+    fun removeItem(index: Int) {
+        list.removeAt(index)
+        notifySectionedItemRemoved(index)
+    }
+```
+O mesmo é feito para remoção de itens em um intervalo, basta chamar o método: notifySectionedItemRangeRemoved.
 
 ## Usando o header fixo
 Para usar o header fixo no topo, como mostra no gif acima. Basta adicionar o StickHeaderItemDecoration em seu RecyclerView.
