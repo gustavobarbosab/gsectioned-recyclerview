@@ -1,4 +1,4 @@
-# GSectioned RecyclerView
+# GSectioned RecyclerView [![Build Status](https://travis-ci.com/gustavobarbosab/gsectioned-recyclerview.svg?branch=master)](https://travis-ci.com/gustavobarbosab/gsectioned-recyclerview)
 
 Esta biblioteca foi criada de modo a facilitar a criação de um RecyclerView com seções, algo muito comum em diversas aplicações.
 Abaixo segue um breve exemplo do funcionamento da biblioteca.
